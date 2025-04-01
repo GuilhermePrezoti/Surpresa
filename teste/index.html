@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mensagem Especial</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #ff758c, #ff7eb3);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            color: white;
+            padding: 10px; /* Ajusta o espaçamento da página */
+            box-sizing: border-box; /* Impede o zoom inesperado */
+        }
+
+        img {
+            max-width: 20%; /* Limita a largura da imagem */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .mensagem {
+            font-size: 4vw; /* Tamanho de fonte responsivo com base na largura da tela */
+            margin-top: 20px;
+            font-weight: bold;
+            line-height: 1.6; /* Ajusta o espaçamento entre as linhas */
+            width: 90%; /* Largura do texto com margem */
+            text-align: center;
+            margin-left: 5%;
+            margin-right: 5%;
+            white-space: normal; /* Quebra o texto conforme necessário */
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            clip-path: polygon(50% 15%, 80% 0, 100% 20%, 100% 50%, 50% 100%, 0 50%, 0 20%, 20% 0);
+            opacity: 0.8;
+            animation: float 4s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+
+        }
+        /* Estilos para o ScrollView */
+        .scroll-container {
+            overflow-y: auto;
+            max-height: 100vh; /* Para garantir que o conteúdo se ajuste na tela e o scroll apareça quando necessário */
+            width: 100%;
+        }
+
+          /* Elemento invisível para iniciar a música */
+          #startMusicArea {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+   
+     <!-- Reprodutor de Áudio (MP3) -->
+     <audio id="audio" preload="auto">
+        <source src="SpotifyMate.com - Stand By Me - Ben E. King.mp3" type="audio/mp3">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <!-- Área invisível para o usuário interagir e disparar a música -->
+    <div id="startMusicArea" onclick="playAudio()"></div>
+
+    <div class="scroll-container">
+        <h2>💖 Sua Imagem Especial 💖</h2>
+        <img src="imagens/foto.jpg" alt="Imagem Especial">
+        <p class="mensagem">Para a Denise,
+
+            Há quatro anos, nossa jornada começou, e desde então, minha vida tem sido um conto de amor, risos, e momentos incríveis ao seu lado. Eu olho para trás e vejo como cada dia ao seu lado foi preenchido com significados profundos, com pequenos gestos que construíram uma história linda e única. Cada momento compartilhado é como uma página escrita com carinho, respeito e, acima de tudo, amor.
+            
+            Você trouxe luz à minha vida de uma forma que eu nunca imaginei ser possível. Seu sorriso ilumina até os meus dias mais difíceis, e seu abraço é a calma em meio ao caos. O seu jeito, o seu olhar, a sua voz... tudo em você me faz sentir que encontrei a pessoa com quem eu quero compartilhar todos os meus dias, todos os meus sonhos e todos os meus planos.
+            
+            Esses quatro anos juntos são apenas o começo de um amor que é imenso e eterno. Cada desafio que enfrentamos juntos só fortaleceu o que sentimos um pelo outro, e a cada conquista, vejo ainda mais o quanto somos feitos um para o outro. Quero continuar ao seu lado, crescer, aprender, e construir tudo o que sonhamos juntos.
+            
+            Amo você mais do que palavras podem expressar, e estou tão grato por esses quatro anos que já vivemos. Meu coração é seu, e sempre será.
+            
+            Te amo para sempre, Denise. 💕</p>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        setInterval(createHeart, 300);
+          // Função para iniciar a música
+          function playAudio() {
+            var audio = document.getElementById('audio');
+            audio.play();
+            // Remover a área invisível após o clique para não interferir mais
+            document.getElementById('startMusicArea').style.display = 'none';
+          }
+    </script>
+</body>
+</html>
